@@ -46,7 +46,7 @@
             this.rbPropText = new System.Windows.Forms.RadioButton();
             this.rbPropView = new System.Windows.Forms.RadioButton();
             this.rbPropEntities = new System.Windows.Forms.RadioButton();
-            this.xrmGridView1 = new Rappen.XTB.Helpers.Controls.XRMGridView();
+            this.xrmGridView1 = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -332,7 +332,7 @@
         private System.Windows.Forms.RadioButton rbPropEntities;
         private System.Windows.Forms.Label lblConnection;
         private System.Windows.Forms.RadioButton rbPropGrid;
-        private Rappen.XTB.Helpers.Controls.XRMGridView xrmGridView1;
+        private Rappen.XTB.Helpers.Controls.XRMDataGridView xrmGridView1;
         private System.Windows.Forms.Button btnExecute;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtEntityFilter;
