@@ -1,8 +1,10 @@
 ﻿using McTools.Xrm.Connection;
 using McTools.Xrm.Connection.WinForms;
+using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
+using Rappen.XTB.Helpers.Controls;
 using Rappen.XTB.Helpers.Extensions;
 using System;
 using System.Data;
@@ -36,9 +38,11 @@ namespace Rappen.XTB.Helpers.Tester
             lblConnection.Text = e.ConnectionDetail.ToString();
             service = e.OrganizationService;
             currentDetail = e.ConnectionDetail;
-            xrmDataComboBox1.Service = service;
-            xrmDataTextBox1.Service = service;
-            xrmGridView1.Service = service;
+            cmbViews.Service = service;
+            txtFetch.Service = service;
+            xrmLookupDialog1.Service = service;
+            chkCheckBox.Service = service;
+            gridData.Service = service;
             LoadEntities();
         }
 
@@ -57,7 +61,7 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void cManager_StepChanged(object sender, StepChangedEventArgs e)
         {
-            xrmEntityComboBox1.DataSource = null;
+            cmbEntities.DataSource = null;
             toolStripStatusLabel1.Text = e.CurrentStep;
         }
 
@@ -69,13 +73,11 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void FilterEntities()
         {
-            xrmDataComboBox1.SelectedIndex = -1;
+            cmbViews.SelectedIndex = -1;
             var filter = txtEntityFilter.Text.Trim().ToLowerInvariant();
             var contains = filter.StartsWith("*");
             filter = filter.Trim('*');
-            xrmEntityComboBox1.DataSource = entities
-                .Where(e => FilterEntity(e, filter, contains, xrmEntityComboBox1.ShowFriendlyNames))
-                .OrderBy(e => OrderEntity(e, xrmEntityComboBox1.ShowFriendlyNames));
+            cmbEntities.DataSource = entities.Where(e => FilterEntity(e, filter, contains, cmbEntities.ShowFriendlyNames));
         }
 
         private bool FilterEntity(EntityMetadata entity, string filter, bool contains, bool friendly)
@@ -100,7 +102,7 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void LoadViews(EntityMetadata entity)
         {
-            xrmDataTextBox1.Entity = null;
+            txtFetch.Entity = null;
             if (entity == null)
             {
                 return;
@@ -111,13 +113,13 @@ namespace Rappen.XTB.Helpers.Tester
             query.AddOrder("name", OrderType.Ascending);
             query.Criteria.AddCondition("returnedtypecode", ConditionOperator.Equal, entity.LogicalName);
             var views = service.RetrieveMultiple(query);
-            xrmDataComboBox1.DataSource = views;
+            cmbViews.DataSource = views;
         }
 
         private void GetData()
         {
-            var data = service.RetrieveMultiple(new FetchExpression(xrmDataTextBox1.Text));
-            xrmGridView1.DataSource = data;
+            var data = service.RetrieveMultiple(new FetchExpression(txtFetch.Text));
+            gridData.DataSource = data;
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -127,22 +129,50 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void xrmEntityComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadViews(xrmEntityComboBox1.SelectedEntity);
+            Enabled = false;
+            cmbViews.DataSource = null;
+            cmbAttributes.DataSource = null;
+            cmbOptions.DataSource = null;
+            txtFetch.Entity = null;
+            try
+            {
+                if (cmbEntities.SelectedEntity is EntityMetadata entity)
+                {
+                    xrmLookupDialog1.LogicalName = entity.LogicalName;
+                    LoadViews(cmbEntities.SelectedEntity);
+                    if (entity.Attributes == null)
+                    {
+                        entity = service.GetEntity(entity.LogicalName);
+                    }
+                    cmbAttributes.DataSource = entity;
+                }
+            }
+            finally
+            {
+                Enabled = true;
+            }
         }
 
         private void xrmDataComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            xrmDataTextBox1.Entity = xrmDataComboBox1.SelectedEntity;
+            txtFetch.Entity = cmbViews.SelectedEntity;
         }
 
         private void rbProp_CheckedChanged(object sender, EventArgs e)
         {
             propertyGrid1.SelectedObject =
-                rbPropEntities.Checked ? (Control)xrmEntityComboBox1 :
-                rbPropView.Checked ? (Control)xrmDataComboBox1 :
-                rbPropText.Checked ? (Control)xrmDataTextBox1 :
-                rbPropGrid.Checked ? (Control)xrmGridView1 :
+                rbPropEntities.Checked ? cmbEntities :
+                rbPropView.Checked ? cmbViews :
+                rbPropText.Checked ? txtFetch :
+                rbPropAttribute.Checked ? cmbAttributes :
+                rbPropOptionset.Checked ? cmbOptions :
+                rbPropCheckbox.Checked ? chkCheckBox :
+                rbPropGrid.Checked ? (Control)gridData :
                 null;
+            if (rbPropLookup.Checked)
+            {
+                propertyGrid1.SelectedObject = xrmLookupDialog1;
+            }
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
@@ -153,6 +183,37 @@ namespace Rappen.XTB.Helpers.Tester
         private void txtEntityFilter_TextChanged(object sender, EventArgs e)
         {
             FilterEntities();
+        }
+
+        private void xrmAttributeComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAttributes.SelectedAttribute is EnumAttributeMetadata attr)
+            {
+                cmbOptions.DataSource = attr.OptionSet;
+            }
+            else
+            {
+                cmbOptions.DataSource = null;
+            }
+            cmbOptions.Enabled = cmbOptions.DataSource != null;
+            if (cmbAttributes.SelectedAttribute is BooleanAttributeMetadata boolattr)
+            {
+                chkCheckBox.Attribute = boolattr.LogicalName;
+                chkCheckBox.Enabled = true;
+            }
+            else
+            {
+                chkCheckBox.Enabled = false;
+            }
+        }
+
+        private void btnLookup_Click(object sender, EventArgs e)
+        {
+            if (xrmLookupDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                txtRecord.Entity = xrmLookupDialog1.Entity;
+                chkCheckBox.Entity = xrmLookupDialog1.Entity;
+            }
         }
     }
 }
