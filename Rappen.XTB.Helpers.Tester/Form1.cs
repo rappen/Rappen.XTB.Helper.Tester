@@ -9,6 +9,7 @@ using Rappen.XTB.Helpers.Extensions;
 using System;
 using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Windows.Forms;
 
 namespace Rappen.XTB.Helpers.Tester
@@ -39,9 +40,9 @@ namespace Rappen.XTB.Helpers.Tester
             service = e.OrganizationService;
             currentDetail = e.ConnectionDetail;
             cmbViews.Service = service;
-            txtFetch.Service = service;
+            xrmRecordView.Service = service;
+            xrmRecordSelected.Service = service;
             xrmLookupDialog1.Service = service;
-            chkCheckBox.Service = service;
             gridData.Service = service;
             LoadEntities();
         }
@@ -102,7 +103,7 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void LoadViews(EntityMetadata entity)
         {
-            txtFetch.Entity = null;
+            xrmRecordView.Record = null;
             if (entity == null)
             {
                 return;
@@ -133,7 +134,7 @@ namespace Rappen.XTB.Helpers.Tester
             cmbViews.DataSource = null;
             cmbAttributes.DataSource = null;
             cmbOptions.DataSource = null;
-            txtFetch.Entity = null;
+            xrmRecordView.Record = null;
             try
             {
                 if (cmbEntities.SelectedEntity is EntityMetadata entity)
@@ -155,7 +156,7 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void xrmDataComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtFetch.Entity = cmbViews.SelectedEntity;
+            xrmRecordView.Record = cmbViews.SelectedRecord;
         }
 
         private void rbProp_CheckedChanged(object sender, EventArgs e)
@@ -163,13 +164,15 @@ namespace Rappen.XTB.Helpers.Tester
             propertyGrid1.SelectedObject =
                 rbPropEntities.Checked ? cmbEntities :
                 rbPropView.Checked ? cmbViews :
-                rbPropText.Checked ? txtFetch :
+                rbPropFetch.Checked ? txtFetch :
                 rbPropAttribute.Checked ? cmbAttributes :
+                rbPropText.Checked ? xrmRecordText :
                 rbPropOptionset.Checked ? cmbOptions :
+                rbPropLookup.Checked ? cmbLookup :
                 rbPropCheckbox.Checked ? chkCheckBox :
                 rbPropGrid.Checked ? (Control)gridData :
                 null;
-            if (rbPropLookup.Checked)
+            if (rbPropLookupDlg.Checked)
             {
                 propertyGrid1.SelectedObject = xrmLookupDialog1;
             }
@@ -187,18 +190,19 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void xrmAttributeComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbAttributes.SelectedAttribute is EnumAttributeMetadata attr)
-            {
-                cmbOptions.DataSource = attr.OptionSet;
-            }
-            else
-            {
-                cmbOptions.DataSource = null;
-            }
+            xrmRecordText.Column = cmbAttributes.SelectedAttribute?.LogicalName;
+            cmbOptions.Column = cmbAttributes.SelectedAttribute?.LogicalName;
+            cmbLookup.Column = cmbAttributes.SelectedAttribute?.LogicalName;
+            SetStateAttributeControls();
+        }
+
+        private void SetStateAttributeControls()
+        {
             cmbOptions.Enabled = cmbOptions.DataSource != null;
+            cmbLookup.Enabled = cmbLookup.DataSource != null;
             if (cmbAttributes.SelectedAttribute is BooleanAttributeMetadata boolattr)
             {
-                chkCheckBox.Attribute = boolattr.LogicalName;
+                chkCheckBox.Column = boolattr.LogicalName;
                 chkCheckBox.Enabled = true;
             }
             else
@@ -211,8 +215,36 @@ namespace Rappen.XTB.Helpers.Tester
         {
             if (xrmLookupDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                txtRecord.Entity = xrmLookupDialog1.Entity;
-                chkCheckBox.Entity = xrmLookupDialog1.Entity;
+                xrmRecordSelected.Record = xrmLookupDialog1.Entity;
+                SetStateAttributeControls();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (xrmRecordSelected.SaveChanges())
+                {
+                    MessageBox.Show("Saved!");
+                }
+                else
+                {
+                    MessageBox.Show("Not saved!");
+                }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                var msg = ex.Message;
+                if (msg.IndexOf("at Microsoft") > 0)
+                {
+                    msg = msg.Substring(0, msg.IndexOf("at Microsoft")).Trim();
+                }
+                MessageBox.Show(msg, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
