@@ -611,7 +611,7 @@
             // 
             // xrmLookupDialog1
             // 
-            this.xrmLookupDialog1.Entity = null;
+            this.xrmLookupDialog1.Record = null;
             this.xrmLookupDialog1.LogicalName = "";
             this.xrmLookupDialog1.LogicalNames = null;
             this.xrmLookupDialog1.Service = null;

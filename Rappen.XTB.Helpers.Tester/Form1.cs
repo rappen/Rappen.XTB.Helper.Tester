@@ -215,7 +215,7 @@ namespace Rappen.XTB.Helpers.Tester
         {
             if (xrmLookupDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                xrmRecordSelected.Record = xrmLookupDialog1.Entity;
+                xrmRecordSelected.Record = xrmLookupDialog1.Record;
                 SetStateAttributeControls();
             }
         }
