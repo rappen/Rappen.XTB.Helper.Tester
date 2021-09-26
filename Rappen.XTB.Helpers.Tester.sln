@@ -9,9 +9,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Rappen.XTB.Helpers", "Rappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlDesigner", "Rappen.XTB.Helper\ControlDesigner\ControlDesigner.csproj", "{3E076ED5-2312-46BF-8883-F9885642A11C}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Rappen.XRM.Helpers", "Rappen.XTB.Helper\Rappen.XRM.Helpers.shproj", "{2EBF1257-150F-46C8-8BBD-2A9235C0EB45}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Rappen.XTB.Helper\Rappen.XTB.Helpers.projitems*{0b88b381-ee9d-41e8-a62c-90152c42de90}*SharedItemsImports = 13
+		Rappen.XTB.Helper\Rappen.XRM.Helpers.projitems*{2ebf1257-150f-46c8-8bbd-2a9235c0eb45}*SharedItemsImports = 13
+		Rappen.XTB.Helper\Rappen.XRM.Helpers.projitems*{8bf3a146-6067-4454-bee2-f4dad0d06abe}*SharedItemsImports = 4
 		Rappen.XTB.Helper\Rappen.XTB.Helpers.projitems*{8bf3a146-6067-4454-bee2-f4dad0d06abe}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
