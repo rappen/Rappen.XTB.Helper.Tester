@@ -170,6 +170,7 @@ namespace Rappen.XTB.Helpers.Tester
                 rbPropOptionset.Checked ? cmbOptions :
                 rbPropLookup.Checked ? cmbLookup :
                 rbPropCheckbox.Checked ? chkCheckBox :
+                rbPropDateTime.Checked ? pickDateTime :
                 rbPropGrid.Checked ? (Control)gridData :
                 null;
             if (rbPropLookupDlg.Checked)
@@ -209,6 +210,15 @@ namespace Rappen.XTB.Helpers.Tester
             {
                 chkCheckBox.Enabled = false;
             }
+            if (cmbAttributes.SelectedAttribute is DateTimeAttributeMetadata dateattr)
+            {
+                pickDateTime.Column = dateattr.LogicalName;
+                pickDateTime.Enabled = true;
+            }
+            else
+            {
+                pickDateTime.Enabled = false;
+            }
         }
 
         private void btnLookup_Click(object sender, EventArgs e)
@@ -246,6 +256,11 @@ namespace Rappen.XTB.Helpers.Tester
             {
                 MessageBox.Show(ex.ToString(), "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pickDateTime_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
