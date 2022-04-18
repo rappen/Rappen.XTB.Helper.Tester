@@ -63,7 +63,7 @@ namespace Rappen.XTB.Helpers.Tester
         private void cManager_StepChanged(object sender, StepChangedEventArgs e)
         {
             cmbEntities.DataSource = null;
-            toolStripStatusLabel1.Text = e.CurrentStep;
+            Invoke((MethodInvoker)delegate { toolStripStatusLabel1.Text = e.CurrentStep; });
         }
 
         private void LoadEntities()
