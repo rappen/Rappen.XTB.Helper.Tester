@@ -77,6 +77,9 @@
             this.cmbEntities = new Rappen.XTB.Helpers.Controls.XRMEntityComboBox();
             this.gridData = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
             this.xrmLookupDialog1 = new Rappen.XTB.Helpers.Controls.XRMLookupDialog();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numNumber = new Rappen.XTB.Helpers.Controls.XRMColumnNumber();
+            this.rbPropNumber = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,6 +90,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -153,6 +157,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.numNumber);
+            this.splitContainer2.Panel1.Controls.Add(this.label12);
             this.splitContainer2.Panel1.Controls.Add(this.pickDateTime);
             this.splitContainer2.Panel1.Controls.Add(this.label11);
             this.splitContainer2.Panel1.Controls.Add(this.label10);
@@ -183,6 +189,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.rbPropNumber);
             this.splitContainer2.Panel2.Controls.Add(this.rbPropDateTime);
             this.splitContainer2.Panel2.Controls.Add(this.rbPropLookup);
             this.splitContainer2.Panel2.Controls.Add(this.rbPropText);
@@ -457,6 +464,7 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(12, 485);
             this.label11.Name = "label11";
@@ -661,6 +669,44 @@
             this.xrmLookupDialog1.Service = null;
             this.xrmLookupDialog1.Title = null;
             // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 509);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 81;
+            this.label12.Text = "Number";
+            // 
+            // numNumber
+            // 
+            this.numNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numNumber.Column = "";
+            this.numNumber.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numNumber.Location = new System.Drawing.Point(96, 507);
+            this.numNumber.Name = "numNumber";
+            this.numNumber.RecordHost = this.xrmRecordSelected;
+            this.numNumber.Size = new System.Drawing.Size(207, 20);
+            this.numNumber.TabIndex = 82;
+            this.numNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // rbPropNumber
+            // 
+            this.rbPropNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rbPropNumber.AutoSize = true;
+            this.rbPropNumber.Location = new System.Drawing.Point(3, 509);
+            this.rbPropNumber.Name = "rbPropNumber";
+            this.rbPropNumber.Size = new System.Drawing.Size(14, 13);
+            this.rbPropNumber.TabIndex = 15;
+            this.rbPropNumber.UseVisualStyleBackColor = true;
+            this.rbPropNumber.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnConnect;
@@ -684,6 +730,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -738,6 +785,9 @@
         private Controls.XRMColumnDateTime pickDateTime;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.RadioButton rbPropDateTime;
+        private Controls.XRMColumnNumber numNumber;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.RadioButton rbPropNumber;
     }
 }
 

@@ -171,6 +171,7 @@ namespace Rappen.XTB.Helpers.Tester
                 rbPropLookup.Checked ? cmbLookup :
                 rbPropCheckbox.Checked ? chkCheckBox :
                 rbPropDateTime.Checked ? pickDateTime :
+                rbPropNumber.Checked ? numNumber :
                 rbPropGrid.Checked ? (Control)gridData :
                 null;
             if (rbPropLookupDlg.Checked)
@@ -201,24 +202,13 @@ namespace Rappen.XTB.Helpers.Tester
         {
             cmbOptions.Enabled = cmbOptions.DataSource != null;
             cmbLookup.Enabled = cmbLookup.DataSource != null;
-            if (cmbAttributes.SelectedAttribute is BooleanAttributeMetadata boolattr)
-            {
-                chkCheckBox.Column = boolattr.LogicalName;
-                chkCheckBox.Enabled = true;
-            }
-            else
-            {
-                chkCheckBox.Enabled = false;
-            }
-            if (cmbAttributes.SelectedAttribute is DateTimeAttributeMetadata dateattr)
-            {
-                pickDateTime.Column = dateattr.LogicalName;
-                pickDateTime.Enabled = true;
-            }
-            else
-            {
-                pickDateTime.Enabled = false;
-            }
+            var meta = cmbAttributes.SelectedAttribute;
+            chkCheckBox.Column = meta is BooleanAttributeMetadata ? meta.LogicalName : string.Empty;
+            chkCheckBox.Enabled = !string.IsNullOrEmpty(chkCheckBox.Column);
+            pickDateTime.Column = meta is DateTimeAttributeMetadata ? meta.LogicalName : string.Empty;
+            pickDateTime.Enabled = !string.IsNullOrEmpty(pickDateTime.Column);
+            numNumber.Column = meta is BigIntAttributeMetadata || meta is DecimalAttributeMetadata || meta is DoubleAttributeMetadata || meta is IntegerAttributeMetadata ? meta.LogicalName : string.Empty;
+            numNumber.Enabled = !string.IsNullOrEmpty(numNumber.Column);
         }
 
         private void btnLookup_Click(object sender, EventArgs e)
