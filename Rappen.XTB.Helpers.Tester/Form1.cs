@@ -1,11 +1,9 @@
 ﻿using McTools.Xrm.Connection;
 using McTools.Xrm.Connection.WinForms;
-using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
-using Rappen.XTB.Helpers.Controls;
-using Rappen.XTB.Helpers.Extensions;
+using Rappen.XRM.Helpers.Extensions;
 using System;
 using System.Data;
 using System.Linq;
