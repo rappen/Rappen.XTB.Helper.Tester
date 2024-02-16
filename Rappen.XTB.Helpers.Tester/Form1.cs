@@ -248,7 +248,11 @@ namespace Rappen.XTB.Helpers.Tester
 
         private void pickDateTime_ValueChanged(object sender, EventArgs e)
         {
+        }
 
+        private void triCheckBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Tri: {triCheckBox1.Text}");
         }
     }
 }

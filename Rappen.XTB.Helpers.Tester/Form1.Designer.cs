@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnConnect = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -36,6 +36,8 @@
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
@@ -51,6 +53,8 @@
             this.txtEntityFilter = new System.Windows.Forms.TextBox();
             this.btnExecute = new System.Windows.Forms.Button();
             this.lblConnection = new System.Windows.Forms.Label();
+            this.rbPropNumber = new System.Windows.Forms.RadioButton();
+            this.rbPropDateTime = new System.Windows.Forms.RadioButton();
             this.rbPropLookup = new System.Windows.Forms.RadioButton();
             this.rbPropText = new System.Windows.Forms.RadioButton();
             this.rbPropCheckbox = new System.Windows.Forms.RadioButton();
@@ -61,10 +65,10 @@
             this.rbPropFetch = new System.Windows.Forms.RadioButton();
             this.rbPropView = new System.Windows.Forms.RadioButton();
             this.rbPropEntities = new System.Windows.Forms.RadioButton();
-            this.label11 = new System.Windows.Forms.Label();
-            this.rbPropDateTime = new System.Windows.Forms.RadioButton();
-            this.pickDateTime = new Rappen.XTB.Helpers.Controls.XRMColumnDateTime();
+            this.triCheckBox1 = new Rappen.XTB.Helpers.Controls.TriCheckBox();
+            this.numNumber = new Rappen.XTB.Helpers.Controls.XRMColumnNumber();
             this.xrmRecordSelected = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
+            this.pickDateTime = new Rappen.XTB.Helpers.Controls.XRMColumnDateTime();
             this.cmbLookup = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.xrmRecordText = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.txtRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
@@ -77,9 +81,6 @@
             this.cmbEntities = new Rappen.XTB.Helpers.Controls.XRMEntityComboBox();
             this.gridData = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
             this.xrmLookupDialog1 = new Rappen.XTB.Helpers.Controls.XRMLookupDialog();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numNumber = new Rappen.XTB.Helpers.Controls.XRMColumnNumber();
-            this.rbPropNumber = new System.Windows.Forms.RadioButton();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -89,8 +90,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -127,7 +128,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.propertyGrid1.Location = new System.Drawing.Point(23, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(281, 601);
+            this.propertyGrid1.Size = new System.Drawing.Size(245, 601);
             this.propertyGrid1.TabIndex = 5;
             // 
             // splitContainer1
@@ -157,6 +158,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.triCheckBox1);
             this.splitContainer2.Panel1.Controls.Add(this.numNumber);
             this.splitContainer2.Panel1.Controls.Add(this.label12);
             this.splitContainer2.Panel1.Controls.Add(this.pickDateTime);
@@ -206,6 +208,26 @@
             this.splitContainer2.SplitterDistance = 306;
             this.splitContainer2.SplitterWidth = 8;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 509);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 81;
+            this.label12.Text = "Number";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 485);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 13);
+            this.label11.TabIndex = 79;
+            this.label11.Text = "DateTime";
             // 
             // label10
             // 
@@ -355,6 +377,28 @@
             this.lblConnection.TabIndex = 4;
             this.lblConnection.Text = "Not connected";
             // 
+            // rbPropNumber
+            // 
+            this.rbPropNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rbPropNumber.AutoSize = true;
+            this.rbPropNumber.Location = new System.Drawing.Point(3, 509);
+            this.rbPropNumber.Name = "rbPropNumber";
+            this.rbPropNumber.Size = new System.Drawing.Size(14, 13);
+            this.rbPropNumber.TabIndex = 15;
+            this.rbPropNumber.UseVisualStyleBackColor = true;
+            this.rbPropNumber.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
+            // 
+            // rbPropDateTime
+            // 
+            this.rbPropDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rbPropDateTime.AutoSize = true;
+            this.rbPropDateTime.Location = new System.Drawing.Point(3, 485);
+            this.rbPropDateTime.Name = "rbPropDateTime";
+            this.rbPropDateTime.Size = new System.Drawing.Size(14, 13);
+            this.rbPropDateTime.TabIndex = 14;
+            this.rbPropDateTime.UseVisualStyleBackColor = true;
+            this.rbPropDateTime.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
+            // 
             // rbPropLookup
             // 
             this.rbPropLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -425,7 +469,7 @@
             // 
             this.rbPropGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbPropGrid.AutoSize = true;
-            this.rbPropGrid.Location = new System.Drawing.Point(309, 39);
+            this.rbPropGrid.Location = new System.Drawing.Point(273, 39);
             this.rbPropGrid.Name = "rbPropGrid";
             this.rbPropGrid.Size = new System.Drawing.Size(14, 13);
             this.rbPropGrid.TabIndex = 6;
@@ -462,26 +506,43 @@
             this.rbPropEntities.UseVisualStyleBackColor = true;
             this.rbPropEntities.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
             // 
-            // label11
+            // triCheckBox1
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 485);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 13);
-            this.label11.TabIndex = 79;
-            this.label11.Text = "DateTime";
+            this.triCheckBox1.AutoSize = true;
+            this.triCheckBox1.Location = new System.Drawing.Point(96, 540);
+            this.triCheckBox1.Name = "triCheckBox1";
+            this.triCheckBox1.Size = new System.Drawing.Size(114, 17);
+            this.triCheckBox1.TabIndex = 83;
+            this.triCheckBox1.Text = "Hmm. I say noooo.";
+            this.triCheckBox1.TextChecked = "Oh yes!";
+            this.triCheckBox1.TextIndeterminate = "Wait what?";
+            this.triCheckBox1.TextUnchecked = "Hmm. I say noooo.";
+            this.triCheckBox1.UseVisualStyleBackColor = true;
+            this.triCheckBox1.CheckStateChanged += new System.EventHandler(this.triCheckBox1_CheckStateChanged);
             // 
-            // rbPropDateTime
+            // numNumber
             // 
-            this.rbPropDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.rbPropDateTime.AutoSize = true;
-            this.rbPropDateTime.Location = new System.Drawing.Point(3, 485);
-            this.rbPropDateTime.Name = "rbPropDateTime";
-            this.rbPropDateTime.Size = new System.Drawing.Size(14, 13);
-            this.rbPropDateTime.TabIndex = 14;
-            this.rbPropDateTime.UseVisualStyleBackColor = true;
-            this.rbPropDateTime.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
+            this.numNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numNumber.Column = "";
+            this.numNumber.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numNumber.Location = new System.Drawing.Point(96, 507);
+            this.numNumber.Name = "numNumber";
+            this.numNumber.RecordHost = this.xrmRecordSelected;
+            this.numNumber.Size = new System.Drawing.Size(207, 20);
+            this.numNumber.TabIndex = 82;
+            this.numNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // xrmRecordSelected
+            // 
+            this.xrmRecordSelected.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.xrmRecordSelected.LogicalName = null;
+            this.xrmRecordSelected.Record = null;
+            this.xrmRecordSelected.Service = null;
             // 
             // pickDateTime
             // 
@@ -494,13 +555,6 @@
             this.pickDateTime.Size = new System.Drawing.Size(207, 20);
             this.pickDateTime.TabIndex = 80;
             this.pickDateTime.ValueChanged += new System.EventHandler(this.pickDateTime_ValueChanged);
-            // 
-            // xrmRecordSelected
-            // 
-            this.xrmRecordSelected.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.xrmRecordSelected.LogicalName = null;
-            this.xrmRecordSelected.Record = null;
-            this.xrmRecordSelected.Service = null;
             // 
             // cmbLookup
             // 
@@ -640,13 +694,14 @@
             this.gridData.AllowUserToDeleteRows = false;
             this.gridData.AllowUserToOrderColumns = true;
             this.gridData.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gridData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridData.ColumnOrder = "";
             this.gridData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridData.FilterColumns = "";
+            this.gridData.LayoutXML = null;
             this.gridData.Location = new System.Drawing.Point(0, 0);
             this.gridData.Name = "gridData";
             this.gridData.ReadOnly = true;
@@ -668,44 +723,6 @@
             this.xrmLookupDialog1.Record = null;
             this.xrmLookupDialog1.Service = null;
             this.xrmLookupDialog1.Title = null;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 509);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 81;
-            this.label12.Text = "Number";
-            // 
-            // numNumber
-            // 
-            this.numNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numNumber.Column = "";
-            this.numNumber.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.numNumber.Location = new System.Drawing.Point(96, 507);
-            this.numNumber.Name = "numNumber";
-            this.numNumber.RecordHost = this.xrmRecordSelected;
-            this.numNumber.Size = new System.Drawing.Size(207, 20);
-            this.numNumber.TabIndex = 82;
-            this.numNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // rbPropNumber
-            // 
-            this.rbPropNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.rbPropNumber.AutoSize = true;
-            this.rbPropNumber.Location = new System.Drawing.Point(3, 509);
-            this.rbPropNumber.Name = "rbPropNumber";
-            this.rbPropNumber.Size = new System.Drawing.Size(14, 13);
-            this.rbPropNumber.TabIndex = 15;
-            this.rbPropNumber.UseVisualStyleBackColor = true;
-            this.rbPropNumber.CheckedChanged += new System.EventHandler(this.rbProp_CheckedChanged);
             // 
             // Form1
             // 
@@ -729,8 +746,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -788,6 +805,7 @@
         private Controls.XRMColumnNumber numNumber;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton rbPropNumber;
+        private Controls.TriCheckBox triCheckBox1;
     }
 }
 
