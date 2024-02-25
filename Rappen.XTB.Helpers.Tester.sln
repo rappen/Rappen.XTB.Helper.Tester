@@ -11,6 +11,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Rappen.XTB.Helpers", "Rappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlDesigner", "Rappen.XTB.Helper\Rappen.XTB.Helpers\ControlDesigner\ControlDesigner.csproj", "{3E076ED5-2312-46BF-8883-F9885642A11C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rappen.XRM.Helpers.PluginTest", "Rappen.XRM.Helpers.PluginTest\Rappen.XRM.Helpers.PluginTest.csproj", "{918054A0-1DB6-4C54-9C50-38A285DD7FD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{3E076ED5-2312-46BF-8883-F9885642A11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E076ED5-2312-46BF-8883-F9885642A11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E076ED5-2312-46BF-8883-F9885642A11C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918054A0-1DB6-4C54-9C50-38A285DD7FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918054A0-1DB6-4C54-9C50-38A285DD7FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918054A0-1DB6-4C54-9C50-38A285DD7FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918054A0-1DB6-4C54-9C50-38A285DD7FD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +45,6 @@ Global
 		Rappen.XTB.Helper\Rappen.XTB.Helpers\Rappen.XTB.Helpers.projitems*{3e076ed5-2312-46bf-8883-f9885642a11c}*SharedItemsImports = 4
 		Rappen.XTB.Helper\Rappen.XRM.Helpers\Rappen.XRM.Helpers.projitems*{8bf3a146-6067-4454-bee2-f4dad0d06abe}*SharedItemsImports = 4
 		Rappen.XTB.Helper\Rappen.XTB.Helpers\Rappen.XTB.Helpers.projitems*{8bf3a146-6067-4454-bee2-f4dad0d06abe}*SharedItemsImports = 4
+		Rappen.XTB.Helper\Rappen.XRM.Helpers\Rappen.XRM.Helpers.projitems*{918054a0-1db6-4c54-9c50-38a285dd7fd3}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
