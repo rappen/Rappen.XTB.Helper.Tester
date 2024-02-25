@@ -9,8 +9,13 @@ namespace Rappen.XRM.Helpers.PluginTest
         public override void Execute(PluginBag bag)
         {
             var account = bag.EntityType.Target;
-            bag.Logger.Log($"Checking {bag.EntityType.Complete["name"]}");
             var preimage = bag.EntityType.PreImage;
+
+            VerifyFax(account, preimage);
+        }
+
+        private static void VerifyFax(Entity account, Entity preimage)
+        {
             var newfax = account.GetAttributeValue("fax", string.Empty);
             var prefax = preimage.GetAttributeValue("fax", string.Empty);
             if (string.IsNullOrEmpty(newfax) != string.IsNullOrEmpty(prefax))
