@@ -92,8 +92,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features.cs" />
     <Compile Include="PluginMultipleRecords.cs" />
     <Compile Include="PluginOneRecord.cs" />
+    <Compile Include="PluginWithoutBaseClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

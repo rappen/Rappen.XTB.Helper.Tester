@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Rappen.XRM.Helpers.Extensions;
 using Rappen.XRM.Helpers.Plugin;
+using System;
+using System.Linq;
 
 namespace Rappen.XRM.Helpers.PluginTest
 {
@@ -8,23 +10,14 @@ namespace Rappen.XRM.Helpers.PluginTest
     {
         public override void Execute(PluginBag bag)
         {
-            foreach (var recordtypes in bag.EntityTypeCollection)
-            {
-                var account = recordtypes.Target;
-                var preimage = recordtypes.PreImage;
+            bag.ContextEntityCollection.ToList()
+                .ForEach(cec => Features.VerifyRevenue(bag.Logger, cec[ContextEntityType.Complete], cec[ContextEntityType.PreImage]));
 
-                VerifyFax(account, preimage);
-            }
-        }
-
-        private static void VerifyFax(Entity account, Entity preimage)
-        {
-            var newfax = account.GetAttributeValue("fax", string.Empty);
-            var prefax = preimage.GetAttributeValue("fax", string.Empty);
-            if (string.IsNullOrEmpty(newfax) != string.IsNullOrEmpty(prefax))
-            {
-                throw new InvalidPluginExecutionException("If you have fax, you have fax. If not, you'll never get a fax.");
-            }
+            var primaryContacts = bag.ContextEntityCollection
+                 .Select(cec => cec[ContextEntityType.Complete].GetAttributeValue("primarycontactid", new EntityReference()))
+                 .Where(c => !c.Id.Equals(Guid.Empty))
+                 .Distinct();
+            primaryContacts.ToList().ForEach(c => Features.SummarizeBossRevenues(bag, c));
         }
     }
 }

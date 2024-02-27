@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Rappen.XRM.Helpers.Extensions;
 using Rappen.XRM.Helpers.Plugin;
+using System;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace Rappen.XRM.Helpers.PluginTest
 {
@@ -8,19 +11,15 @@ namespace Rappen.XRM.Helpers.PluginTest
     {
         public override void Execute(PluginBag bag)
         {
-            var account = bag.EntityType.Target;
-            var preimage = bag.EntityType.PreImage;
+            var account = bag.ContextEntity[ContextEntityType.Complete];
+            var preimage = bag.ContextEntity[ContextEntityType.PreImage];
 
-            VerifyFax(account, preimage);
-        }
+            Features.VerifyRevenue(bag.Logger, account, preimage);
 
-        private static void VerifyFax(Entity account, Entity preimage)
-        {
-            var newfax = account.GetAttributeValue("fax", string.Empty);
-            var prefax = preimage.GetAttributeValue("fax", string.Empty);
-            if (string.IsNullOrEmpty(newfax) != string.IsNullOrEmpty(prefax))
+            var primaryContact = account.GetAttributeValue("primarycontactid", new EntityReference());
+            if (!primaryContact.Id.Equals(Guid.Empty))
             {
-                throw new InvalidPluginExecutionException("If you have fax, you have fax. If not, you'll never get a fax.");
+                Features.SummarizeBossRevenues(bag, primaryContact);
             }
         }
     }
